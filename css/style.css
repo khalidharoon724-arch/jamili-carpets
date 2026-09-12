@@ -891,14 +891,16 @@ p { margin-bottom: 1rem; }
 
 .modal-actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
 .modal-actions .btn {
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
 }
+
 
 
 /* ===== SERVICES ===== */
@@ -2169,11 +2171,13 @@ p { margin-bottom: 1rem; }
     padding: 1.5rem;
   }
 
-  .modal-actions .btn {
-    width: 100%;
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
+    .modal-actions .btn {
+    width: auto;
+    flex: 1 1 auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
+
 
 
   .admin-tabs {
