@@ -506,7 +506,8 @@
             '<div class="product-description">' + esc(p.description || '') + '</div>' +
             '<table class="modal-spec-table">' +
               '<tr><td>Size</td><td>' + esc(p.size || 'Custom Size Available') + '</td></tr>' +
-              '<tr><td>Quality (Knot Density)</td><td>' + esc(p.quality || 'N/A') + '</td></tr>' +
+              '<tr><td>Quality</td><td>' + esc(p.quality || 'N/A') + '</td></tr>' +
+
               '<tr><td>Material</td><td>' + esc(p.material || 'Wool') + '</td></tr>' +
               '<tr><td>Washing Type</td><td>' + esc(p.washing_type || 'Regular') + '</td></tr>' +
               '<tr><td>Country of Origin</td><td>' + esc(p.country_of_origin || 'Afghanistan') + '</td></tr>' +
