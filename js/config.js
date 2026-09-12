@@ -1,19 +1,9 @@
 /* ============================================================
    JAMILI CARPETS — Supabase Configuration
-   ============================================================
-   INSTRUCTIONS:
-   1. Create a free project at https://supabase.com
-   2. Go to Project Settings → API
-   3. Copy your Project URL and anon/public key below
-   4. Run supabase-schema.sql in the SQL Editor
-   5. Create a storage bucket named: jamili-carpets
    ============================================================ */
 
 window.SUPABASE_CONFIG = {
-  // TODO: Replace with your actual Supabase URL
-  url: 'https://YOUR-PROJECT-REF.supabase.co',
-  // TODO: Replace with your actual Supabase anon key
-  anonKey: 'YOUR-SUPABASE-ANON-KEY',
-  // Storage bucket name (created by supabase-schema.sql)
+  url: 'https://ztjopxtbabrwdduqtrsa.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0am9weHRiYWJyd2RkdXF0cnNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxODA0ODQsImV4cCI6MjEwNDc1NjQ4NH0.lrElXnebNYoi_POEIg9TjqXtBxMsjzx6J46JpFXUqKk',
   bucket: 'jamili-carpets'
 };
