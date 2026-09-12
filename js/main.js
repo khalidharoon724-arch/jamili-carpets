@@ -131,9 +131,11 @@
     if (headerEl) {
       headerEl.innerHTML =
         '<div class="navbar">' +
-          '<a href="index.html" class="nav-logo">' +
-            (logoUrl ? '<img src="' + esc(logoUrl) + '" alt="' + esc(companyName) + '">' : '<span style="font-family:Playfair Display,serif;font-size:1.5rem;color:#C99A47;font-weight:700;">JAMILI CARPETS</span>') +
+                    '<a href="index.html" class="nav-logo">' +
+            (logoUrl ? '<img src="' + esc(logoUrl) + '" alt="' + esc(companyName) + '">' : '') +
+            '<span style="font-family:Playfair Display,serif;font-size:1.4rem;color:#C99A47;font-weight:700;letter-spacing:1px;">' + esc(companyName) + '</span>' +
           '</a>' +
+
           '<nav class="nav-menu" id="nav-menu">' +
             navHtml +
             '<a href="' + esc(s.whatsapp || '#') + '" class="nav-cta btn btn-primary" target="_blank" rel="noopener">Enquire Now</a>' +
