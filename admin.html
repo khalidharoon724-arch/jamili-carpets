@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D1B2A">
+  <title>Admin Panel — JAMILI CARPETS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230D1B2A'/%3E%3Ctext x='50' y='62' font-family='serif' font-size='40' font-weight='bold' fill='%23C99A47' text-anchor='middle'%3EJC%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="admin">
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="container">
+      <h1>JAMILI CARPETS — Admin Panel</h1>
+      <div class="admin-user" id="admin-user" style="display:none;">
+        <span id="admin-email"></span>
+        <button class="admin-logout" id="admin-logout">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <section class="section" id="admin-login-section">
+    <div class="admin-login">
+      <h2>Admin Login</h2>
+      <p>Sign in to manage your website content.</p>
+      <div class="form-message" id="login-message"></div>
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+      </form>
+      <p style="margin-top:1.5rem;font-size:0.85rem;color:#6B7280;">Use your Supabase Auth credentials. Create users in Supabase Dashboard → Authentication → Users.</p>
+    </div>
+  </section>
+
+  <!-- Admin Panel (hidden until login) -->
+  <section class="section" id="admin-panel-section" style="display:none;">
+    <div class="container">
+      <!-- Tabs -->
+      <div class="admin-tabs" id="admin-tabs">
+        <button class="admin-tab active" data-tab="site">Site Settings</button>
+        <button class="admin-tab" data-tab="home">Home</button>
+        <button class="admin-tab" data-tab="about">About</button>
+        <button class="admin-tab" data-tab="products">Products</button>
+        <button class="admin-tab" data-tab="services">Services</button>
+        <button class="admin-tab" data-tab="faq">FAQ</button>
+        <button class="admin-tab" data-tab="contact">Contact</button>
+        <button class="admin-tab" data-tab="messages">Messages</button>
+      </div>
+
+      <!-- Site Settings -->
+      <div class="admin-panel" id="tab-site">
+        <h3>Site Settings</h3>
+        <div class="admin-field">
+          <label>Company Name</label>
+          <input type="text" id="site-company-name">
+        </div>
+        <div class="admin-field">
+          <label>Logo Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="site-logo-preview" src="" alt="Logo preview"></div>
+            <input type="file" id="site-logo-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="site-logo-btn">Upload Logo</button>
+          </div>
+          <div class="hint">Upload a new logo image. It will be stored in Supabase Storage.</div>
+        </div>
+        <div class="admin-field">
+          <label>Hero Type</label>
+          <select id="site-hero-type">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+          </select>
+        </div>
+        <div class="admin-field">
+          <label>Hero Image / Video URL</label>
+          <input type="text" id="site-hero-url">
+          <div class="hint">For video, use an MP4 URL (e.g. from Supabase Storage).</div>
+        </div>
+        <div class="admin-field">
+          <label>Hero Title</label>
+          <input type="text" id="site-hero-title">
+        </div>
+        <div class="admin-field">
+          <label>Hero Subtitle</label>
+          <textarea id="site-hero-subtitle"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Hero Button Text</label>
+          <input type="text" id="site-hero-button">
+        </div>
+        <div class="admin-field">
+          <label>Phone</label>
+          <input type="text" id="site-phone">
+        </div>
+        <div class="admin-field">
+          <label>WhatsApp Link</label>
+          <input type="text" id="site-whatsapp">
+        </div>
+        <div class="admin-field">
+          <label>Email</label>
+          <input type="text" id="site-email">
+        </div>
+        <div class="admin-field">
+          <label>Address</label>
+          <input type="text" id="site-address">
+        </div>
+        <div class="admin-field">
+          <label>Google Maps Link</label>
+          <input type="text" id="site-maps">
+        </div>
+        <div class="admin-field">
+          <label>Instagram Link</label>
+          <input type="text" id="site-instagram">
+        </div>
+        <div class="admin-field">
+          <label>Facebook Link</label>
+          <input type="text" id="site-facebook">
+        </div>
+        <div class="admin-field">
+          <label>Opening Hours</label>
+          <input type="text" id="site-hours">
+        </div>
+        <button class="admin-save-btn" data-save="site">Save Site Settings</button>
+      </div>
+
+      <!-- Home -->
+      <div class="admin-panel" id="tab-home" style="display:none;">
+        <h3>Home Page Content</h3>
+        <div class="admin-field">
+          <label>Section 1 Title</label>
+          <input type="text" id="home-s1-title">
+        </div>
+        <div class="admin-field">
+          <label>Section 1 Text</label>
+          <textarea id="home-s1-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Section 1 Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="home-s1-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="home-s1-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="home-s1-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Section 2 Title</label>
+          <input type="text" id="home-s2-title">
+        </div>
+        <div class="admin-field">
+          <label>Section 2 Text</label>
+          <textarea id="home-s2-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Section 3 Title</label>
+          <input type="text" id="home-s3-title">
+        </div>
+        <div class="admin-field">
+          <label>Section 3 Text</label>
+          <textarea id="home-s3-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Section 3 Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="home-s3-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="home-s3-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="home-s3-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Feature 1 Title</label>
+          <input type="text" id="home-f1-title">
+        </div>
+        <div class="admin-field">
+          <label>Feature 1 Text</label>
+          <textarea id="home-f1-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Feature 2 Title</label>
+          <input type="text" id="home-f2-title">
+        </div>
+        <div class="admin-field">
+          <label>Feature 2 Text</label>
+          <textarea id="home-f2-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Feature 3 Title</label>
+          <input type="text" id="home-f3-title">
+        </div>
+        <div class="admin-field">
+          <label>Feature 3 Text</label>
+          <textarea id="home-f3-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Feature 4 Title</label>
+          <input type="text" id="home-f4-title">
+        </div>
+        <div class="admin-field">
+          <label>Feature 4 Text</label>
+          <textarea id="home-f4-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Stat 1 Number</label>
+          <input type="text" id="home-st1-num">
+        </div>
+        <div class="admin-field">
+          <label>Stat 1 Label</label>
+          <input type="text" id="home-st1-label">
+        </div>
+        <div class="admin-field">
+          <label>Stat 2 Number</label>
+          <input type="text" id="home-st2-num">
+        </div>
+        <div class="admin-field">
+          <label>Stat 2 Label</label>
+          <input type="text" id="home-st2-label">
+        </div>
+        <div class="admin-field">
+          <label>Stat 3 Number</label>
+          <input type="text" id="home-st3-num">
+        </div>
+        <div class="admin-field">
+          <label>Stat 3 Label</label>
+          <input type="text" id="home-st3-label">
+        </div>
+        <div class="admin-field">
+          <label>Stat 4 Number</label>
+          <input type="text" id="home-st4-num">
+        </div>
+        <div class="admin-field">
+          <label>Stat 4 Label</label>
+          <input type="text" id="home-st4-label">
+        </div>
+        <button class="admin-save-btn" data-save="home">Save Home Content</button>
+      </div>
+
+      <!-- About -->
+      <div class="admin-panel" id="tab-about" style="display:none;">
+        <h3>About Page Content</h3>
+        <div class="admin-field">
+          <label>Hero Title</label>
+          <input type="text" id="about-hero-title">
+        </div>
+        <div class="admin-field">
+          <label>Hero Subtitle</label>
+          <textarea id="about-hero-subtitle"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Hero Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="about-hero-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="about-hero-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="about-hero-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Story Title</label>
+          <input type="text" id="about-story-title">
+        </div>
+        <div class="admin-field">
+          <label>Story Text (use blank lines to separate paragraphs)</label>
+          <textarea id="about-story-text" style="min-height:200px;"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Story Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="about-story-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="about-story-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="about-story-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Mission Title</label>
+          <input type="text" id="about-mission-title">
+        </div>
+        <div class="admin-field">
+          <label>Mission Text</label>
+          <textarea id="about-mission-text" style="min-height:120px;"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Mission Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="about-mission-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="about-mission-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="about-mission-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Vision Title</label>
+          <input type="text" id="about-vision-title">
+        </div>
+        <div class="admin-field">
+          <label>Vision Text</label>
+          <textarea id="about-vision-text" style="min-height:120px;"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Vision Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="about-vision-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="about-vision-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="about-vision-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Values Title</label>
+          <input type="text" id="about-values-title">
+        </div>
+        <div class="admin-field">
+          <label>Values Text</label>
+          <textarea id="about-values-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Value 1 Title</label>
+          <input type="text" id="about-v1-title">
+        </div>
+        <div class="admin-field">
+          <label>Value 1 Text</label>
+          <textarea id="about-v1-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Value 2 Title</label>
+          <input type="text" id="about-v2-title">
+        </div>
+        <div class="admin-field">
+          <label>Value 2 Text</label>
+          <textarea id="about-v2-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Value 3 Title</label>
+          <input type="text" id="about-v3-title">
+        </div>
+        <div class="admin-field">
+          <label>Value 3 Text</label>
+          <textarea id="about-v3-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Value 4 Title</label>
+          <input type="text" id="about-v4-title">
+        </div>
+        <div class="admin-field">
+          <label>Value 4 Text</label>
+          <textarea id="about-v4-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Milestone 1 Year</label>
+          <input type="text" id="about-m1-year">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 1 Title</label>
+          <input type="text" id="about-m1-title">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 1 Text</label>
+          <textarea id="about-m1-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Milestone 2 Year</label>
+          <input type="text" id="about-m2-year">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 2 Title</label>
+          <input type="text" id="about-m2-title">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 2 Text</label>
+          <textarea id="about-m2-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Milestone 3 Year</label>
+          <input type="text" id="about-m3-year">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 3 Title</label>
+          <input type="text" id="about-m3-title">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 3 Text</label>
+          <textarea id="about-m3-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Milestone 4 Year</label>
+          <input type="text" id="about-m4-year">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 4 Title</label>
+          <input type="text" id="about-m4-title">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 4 Text</label>
+          <textarea id="about-m4-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Milestone 5 Year</label>
+          <input type="text" id="about-m5-year">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 5 Title</label>
+          <input type="text" id="about-m5-title">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 5 Text</label>
+          <textarea id="about-m5-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Milestone 6 Year</label>
+          <input type="text" id="about-m6-year">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 6 Title</label>
+          <input type="text" id="about-m6-title">
+        </div>
+        <div class="admin-field">
+          <label>Milestone 6 Text</label>
+          <textarea id="about-m6-text"></textarea>
+        </div>
+        <button class="admin-save-btn" data-save="about">Save About Content</button>
+      </div>
+
+      <!-- Products -->
+      <div class="admin-panel" id="tab-products" style="display:none;">
+        <h3>Products Management</h3>
+        <button class="admin-add-btn" id="product-add-btn">+ Add New Product</button>
+        <div class="admin-product-list" id="admin-product-list"></div>
+        <div class="admin-panel" id="product-editor" style="display:none;background:#F9FAFB;">
+          <h3 id="product-editor-title">Edit Product</h3>
+          <input type="hidden" id="product-id">
+          <div class="admin-field">
+            <label>Product Name</label>
+            <input type="text" id="product-name">
+          </div>
+          <div class="admin-field">
+            <label>Size</label>
+            <input type="text" id="product-size">
+          </div>
+          <div class="admin-field">
+            <label>Quality (Knot Density)</label>
+            <input type="text" id="product-quality">
+          </div>
+          <div class="admin-field">
+            <label>Material</label>
+            <input type="text" id="product-material">
+          </div>
+          <div class="admin-field">
+            <label>Description</label>
+            <textarea id="product-description" style="min-height:120px;"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Washing Type</label>
+            <input type="text" id="product-washing">
+          </div>
+          <div class="admin-field">
+            <label>Country of Origin</label>
+            <input type="text" id="product-country">
+          </div>
+          <div class="admin-field">
+            <label>Price</label>
+            <input type="text" id="product-price">
+          </div>
+          <div class="admin-field">
+            <label>Category</label>
+            <input type="text" id="product-category">
+          </div>
+          <div class="admin-field">
+            <label>Display Order</label>
+            <input type="number" id="product-order">
+          </div>
+          <div class="admin-field">
+            <label>Featured</label>
+            <select id="product-featured">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+          <div class="admin-field">
+            <label>Active</label>
+            <select id="product-active">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <div class="admin-field">
+            <label>Front Image</label>
+            <div class="admin-image-upload">
+              <div class="admin-image-preview"><img id="product-front-preview" src="" alt="Front"></div>
+              <input type="file" id="product-front-file" accept="image/*" style="display:none;">
+              <button class="admin-upload-btn" id="product-front-btn">Upload Front Image</button>
+            </div>
+          </div>
+          <div class="admin-field">
+            <label>Back Image</label>
+            <div class="admin-image-upload">
+              <div class="admin-image-preview"><img id="product-back-preview" src="" alt="Back"></div>
+              <input type="file" id="product-back-file" accept="image/*" style="display:none;">
+              <button class="admin-upload-btn" id="product-back-btn">Upload Back Image</button>
+            </div>
+          </div>
+          <div class="admin-field">
+            <label>Detail Image</label>
+            <div class="admin-image-upload">
+              <div class="admin-image-preview"><img id="product-detail-preview" src="" alt="Detail"></div>
+              <input type="file" id="product-detail-file" accept="image/*" style="display:none;">
+              <button class="admin-upload-btn" id="product-detail-btn">Upload Detail Image</button>
+            </div>
+          </div>
+          <button class="admin-save-btn" id="product-save-btn">Save Product</button>
+          <button class="admin-save-btn" id="product-cancel-btn" style="background:#6B7280;color:#fff;margin-left:0.5rem;">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="admin-panel" id="tab-services" style="display:none;">
+        <h3>Services Page Content</h3>
+        <div class="admin-field">
+          <label>Hero Title</label>
+          <input type="text" id="services-hero-title">
+        </div>
+        <div class="admin-field">
+          <label>Hero Subtitle</label>
+          <textarea id="services-hero-subtitle"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Hero Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="services-hero-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="services-hero-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="services-hero-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Intro Text</label>
+          <textarea id="services-intro-text" style="min-height:100px;"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 1 Title</label>
+          <input type="text" id="services-s1-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 1 Text</label>
+          <textarea id="services-s1-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 2 Title</label>
+          <input type="text" id="services-s2-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 2 Text</label>
+          <textarea id="services-s2-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 3 Title</label>
+          <input type="text" id="services-s3-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 3 Text</label>
+          <textarea id="services-s3-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 4 Title</label>
+          <input type="text" id="services-s4-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 4 Text</label>
+          <textarea id="services-s4-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 5 Title</label>
+          <input type="text" id="services-s5-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 5 Text</label>
+          <textarea id="services-s5-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 6 Title</label>
+          <input type="text" id="services-s6-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 6 Text</label>
+          <textarea id="services-s6-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 7 Title</label>
+          <input type="text" id="services-s7-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 7 Text</label>
+          <textarea id="services-s7-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Service 8 Title</label>
+          <input type="text" id="services-s8-title">
+        </div>
+        <div class="admin-field">
+          <label>Service 8 Text</label>
+          <textarea id="services-s8-text"></textarea>
+        </div>
+        <button class="admin-save-btn" data-save="services">Save Services Content</button>
+      </div>
+
+      <!-- FAQ -->
+      <div class="admin-panel" id="tab-faq" style="display:none;">
+        <h3>FAQ Management</h3>
+        <button class="admin-add-btn" id="faq-add-btn">+ Add New Question</button>
+        <div class="admin-faq-list" id="admin-faq-list"></div>
+        <div class="admin-panel" id="faq-editor" style="display:none;background:#F9FAFB;">
+          <h3 id="faq-editor-title">Edit FAQ</h3>
+          <input type="hidden" id="faq-id">
+          <div class="admin-field">
+            <label>Question</label>
+            <input type="text" id="faq-question">
+          </div>
+          <div class="admin-field">
+            <label>Answer</label>
+            <textarea id="faq-answer" style="min-height:120px;"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Display Order</label>
+            <input type="number" id="faq-order">
+          </div>
+          <div class="admin-field">
+            <label>Active</label>
+            <select id="faq-active">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <button class="admin-save-btn" id="faq-save-btn">Save FAQ</button>
+          <button class="admin-save-btn" id="faq-cancel-btn" style="background:#6B7280;color:#fff;margin-left:0.5rem;">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="admin-panel" id="tab-contact" style="display:none;">
+        <h3>Contact Page Content</h3>
+        <div class="admin-field">
+          <label>Hero Title</label>
+          <input type="text" id="contact-hero-title">
+        </div>
+        <div class="admin-field">
+          <label>Hero Subtitle</label>
+          <textarea id="contact-hero-subtitle"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Hero Image</label>
+          <div class="admin-image-upload">
+            <div class="admin-image-preview"><img id="contact-hero-img-preview" src="" alt="Preview"></div>
+            <input type="file" id="contact-hero-img-file" accept="image/*" style="display:none;">
+            <button class="admin-upload-btn" id="contact-hero-img-btn">Upload Image</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Form Title</label>
+          <input type="text" id="contact-form-title">
+        </div>
+        <div class="admin-field">
+          <label>Form Text</label>
+          <textarea id="contact-form-text"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Map Title</label>
+          <input type="text" id="contact-map-title">
+        </div>
+        <div class="admin-field">
+          <label>Map Text</label>
+          <textarea id="contact-map-text"></textarea>
+        </div>
+        <button class="admin-save-btn" data-save="contact">Save Contact Content</button>
+      </div>
+
+      <!-- Messages -->
+      <div class="admin-panel" id="tab-messages" style="display:none;">
+        <h3>Contact Messages</h3>
+        <div class="admin-messages-list" id="admin-messages-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast -->
+  <div class="admin-toast" id="admin-toast"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
