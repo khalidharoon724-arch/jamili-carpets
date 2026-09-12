@@ -115,7 +115,7 @@ Today, Jamili Carpets stands as a testament to the enduring appeal of handmade A
   milestone4_text TEXT DEFAULT 'Participated in major international carpet exhibitions and received recognition for quality.',
   milestone5_year TEXT DEFAULT '2020',
   milestone5_title TEXT DEFAULT 'Digital Transformation',
-  milestone6_text TEXT DEFAULT 'Launched our online presence, making our carpets accessible to customers worldwide.',
+  milestone5_text TEXT DEFAULT 'Launched our online presence, making our carpets accessible to customers worldwide.',
   milestone6_year TEXT DEFAULT '2025',
   milestone6_title TEXT DEFAULT 'Continuing the Legacy',
   milestone6_text TEXT DEFAULT 'With over four decades of experience, we continue to innovate while preserving tradition.',
@@ -288,7 +288,7 @@ VALUES ('jamili-carpets', 'jamili-carpets', true)
 ON CONFLICT (id) DO NOTHING;
 
 CREATE POLICY "Public read storage" ON storage.objects FOR SELECT USING (bucket_id = 'jamili-carpets');
-CREATE POLICY "Authenticated upload storage" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket.id = 'jamili-carpets');
+CREATE POLICY "Authenticated upload storage" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'jamili-carpets');
 CREATE POLICY "Authenticated update storage" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'jamili-carpets');
 CREATE POLICY "Authenticated delete storage" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'jamili-carpets');
 
