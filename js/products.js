@@ -60,6 +60,7 @@
     var block1El = document.getElementById('home-block1');
     if (block1El) {
       block1El.innerHTML =
+        '<div class="container">' +
         '<div class="content-block">' +
           '<div class="content-block-image reveal"><img src="' + esc(h.section1_image || '') + '" alt="' + esc(h.section1_title || '') + '" loading="lazy"></div>' +
           '<div class="content-block-text reveal">' +
@@ -67,6 +68,7 @@
             '<p>' + esc(h.section1_text || '') + '</p>' +
             '<a href="about.html" class="btn btn-outline">Learn More About Us</a>' +
           '</div>' +
+        '</div>' +
         '</div>';
     }
 
@@ -86,6 +88,7 @@
     var block2El = document.getElementById('home-block2');
     if (block2El) {
       block2El.innerHTML =
+        '<div class="container">' +
         '<div class="content-block reverse">' +
           '<div class="content-block-image reveal"><img src="' + esc(h.section3_image || '') + '" alt="' + esc(h.section3_title || '') + '" loading="lazy"></div>' +
           '<div class="content-block-text reveal">' +
@@ -93,6 +96,7 @@
             '<p>' + esc(h.section3_text || '') + '</p>' +
             '<a href="products.html" class="btn btn-outline">View Our Products</a>' +
           '</div>' +
+        '</div>' +
         '</div>';
     }
 
@@ -110,6 +114,12 @@
           return buildProductCard(p);
         }).join('');
         attachProductCardListeners();
+        // Force reveal elements visible — the scroll observer was already
+        // initialized before these async-loaded cards existed, so they
+        // would otherwise stay at opacity:0 forever.
+        featuredEl.querySelectorAll('.reveal').forEach(function (el) {
+          el.classList.add('visible');
+        });
       }).catch(function () {});
     }
   };
@@ -137,12 +147,14 @@
     if (storyEl) {
       var storyText = (a.story_text || '').split('\n\n');
       storyEl.innerHTML =
+        '<div class="container">' +
         '<div class="content-block">' +
           '<div class="content-block-image reveal"><img src="' + esc(a.story_image || '') + '" alt="' + esc(a.story_title || '') + '" loading="lazy"></div>' +
           '<div class="content-block-text reveal">' +
             '<h2>' + esc(a.story_title || '') + '</h2>' +
             storyText.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
           '</div>' +
+        '</div>' +
         '</div>';
     }
 
@@ -150,12 +162,14 @@
     var missionEl = document.getElementById('about-mission');
     if (missionEl) {
       missionEl.innerHTML =
+        '<div class="container">' +
         '<div class="content-block reverse">' +
           '<div class="content-block-image reveal"><img src="' + esc(a.mission_image || '') + '" alt="' + esc(a.mission_title || '') + '" loading="lazy"></div>' +
           '<div class="content-block-text reveal">' +
             '<h2>' + esc(a.mission_title || '') + '</h2>' +
             '<p>' + esc(a.mission_text || '') + '</p>' +
           '</div>' +
+        '</div>' +
         '</div>';
     }
 
@@ -163,12 +177,14 @@
     var visionEl = document.getElementById('about-vision');
     if (visionEl) {
       visionEl.innerHTML =
+        '<div class="container">' +
         '<div class="content-block">' +
           '<div class="content-block-image reveal"><img src="' + esc(a.vision_image || '') + '" alt="' + esc(a.vision_title || '') + '" loading="lazy"></div>' +
           '<div class="content-block-text reveal">' +
             '<h2>' + esc(a.vision_title || '') + '</h2>' +
             '<p>' + esc(a.vision_text || '') + '</p>' +
           '</div>' +
+        '</div>' +
         '</div>';
     }
 
