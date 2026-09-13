@@ -131,10 +131,11 @@
     if (headerEl) {
       headerEl.innerHTML =
         '<div class="navbar">' +
-                    '<a href="index.html" class="nav-logo">' +
+                              '<a href="index.html" class="nav-logo">' +
             (logoUrl ? '<img src="' + esc(logoUrl) + '" alt="' + esc(companyName) + '">' : '') +
-            '<span style="font-family:Playfair Display,serif;font-size:1.4rem;color:#C99A47;font-weight:700;letter-spacing:1px;">' + esc(companyName) + '</span>' +
+            '<span class="logo-text">' + esc(companyName) + '</span>' +
           '</a>' +
+
 
           '<nav class="nav-menu" id="nav-menu">' +
             navHtml +
