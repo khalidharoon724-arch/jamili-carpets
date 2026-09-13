@@ -2190,11 +2190,13 @@ p { margin-bottom: 1rem; }
     min-height: 100vh;
   }
 
-    .modal-main-image {
+      .modal-main-image {
     height: auto;
     max-height: 250px;
     object-fit: contain;
+    margin-top: 48px;
   }
+
 
   .modal-details {
     padding: 1.5rem;
