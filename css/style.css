@@ -264,9 +264,10 @@ p { margin-bottom: 1rem; }
   width: 48px;
   object-fit: cover;
   border-radius: 0;
-  border: 2px solid #C99A47;
+  border: none;
   transition: var(--transition);
 }
+
 
 
 .header.scrolled .nav-logo img {
