@@ -263,11 +263,11 @@ p { margin-bottom: 1rem; }
   height: 48px;
   width: 48px;
   object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid var(--color-gold);
+  border-radius: 0;
+  border: 2px solid #C99A47;
   transition: var(--transition);
-  flex-shrink: 0;
 }
+
 
 .header.scrolled .nav-logo img {
   height: 38px;
