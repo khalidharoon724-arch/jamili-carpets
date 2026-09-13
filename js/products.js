@@ -515,7 +515,8 @@
               '<tr><td>Price</td><td><strong style="color:#C99A47;">' + esc(p.price || 'Enquire via WhatsApp') + '</strong></td></tr>' +
             '</table>' +
             '<div class="modal-actions">' +
-              '<a href="' + esc(whatsappLink) + '" class="btn btn-whatsapp" target="_blank" rel="noopener">' + icons.whatsapp + ' Enquire via WhatsApp</a>' +
+              '<a href="' + esc(whatsappLink) + '" class="btn btn-whatsapp" target="_blank" rel="noopener">' + icons.whatsapp + ' Enquire</a>' +
+
               '<a href="mailto:' + esc(s.email || '') + '?subject=' + encodeURIComponent('Enquiry: ' + p.name) + '" class="btn btn-outline">' + icons.mail + ' Email Us</a>' +
             '</div>' +
           '</div>' +
